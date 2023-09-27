@@ -41,7 +41,8 @@ class ElementalMaps extends BaseElement
         'Latitude' => 'Decimal(11,8)',
         'Longitude' => 'Decimal(11,8)',
         'MapZoom' => 'Int',
-        'MapType' => 'Varchar'
+        'MapType' => 'Varchar',
+        'MapHeight' => 'Varchar',
     ];
 
     private static $has_many = [
@@ -50,7 +51,8 @@ class ElementalMaps extends BaseElement
 
     private static $defaults = [
         'MapZoom' => 12,
-        'MapType' => 'roadmap'
+        'MapType' => 'roadmap',
+        'MapHeight' => '500px',
     ];
 
     public function getCMSFields()
@@ -72,6 +74,8 @@ class ElementalMaps extends BaseElement
             'hybrid' => 'Hybrid',
             'terrain' => 'Terrain'
         ]));
+
+        $fields->addFieldToTab('Root.Main', TextField::create('MapHeight', 'Map Height')->setDescription('CSS value, e.g. 500px - Leave empty to control in stylesheet'));
 
         $markersField = $fields->dataFieldByName('Markers');
         if ($markersField) {

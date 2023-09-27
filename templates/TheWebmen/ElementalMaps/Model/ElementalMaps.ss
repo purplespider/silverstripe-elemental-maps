@@ -1,4 +1,4 @@
-<div class="google-map" data-latitude="$Latitude" data-longitude="$Longitude" data-zoom="$MapZoom" data-type="$MapType">
+<div class="google-map" <% if $MapHeight %>style="height:$MapHeight"<% end_if %> data-latitude="$Latitude" data-longitude="$Longitude" data-zoom="$MapZoom" data-type="$MapType">
     <% if $Markers %>
     <% loop $Markers %>
     <script class="map-markers" type="text/json">
