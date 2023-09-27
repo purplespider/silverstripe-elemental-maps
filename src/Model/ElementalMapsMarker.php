@@ -36,7 +36,7 @@ class ElementalMapsMarker extends DataObject
         $fields->removeByName('Link');
 
         $fields->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
-        $fields->addFieldToTab('Root.Main', $googlePlacesField = new GooglePlacesField('MapLocation', 'Map location'));
+        $fields->addFieldToTab('Root.Main', $googlePlacesField = GooglePlacesField::create('MapLocation', 'Location')->setDescription('Start typing to search places using Google Maps'));
         $fields->addFieldToTab('Root.Main', TextField::create('Latitude'));
         $fields->addFieldToTab('Root.Main', TextField::create('Longitude'));
         $googlePlacesField->setLatitudeField('Latitude');
