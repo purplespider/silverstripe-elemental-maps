@@ -29,6 +29,8 @@ class ElementalMaps extends BaseElement
 
     private static $controller_class = ElementalMapsController::class;
 
+    private static $inline_editable = false;
+
     public function getType()
     {
         return _t(__CLASS__ . '.BlockType', 'Map');
