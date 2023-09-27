@@ -15,7 +15,7 @@ class ElementalMaps extends BaseElement
 {
     private static $maps_api_key = false;
 
-    private static $icon = 'font-icon-block-globe-1';
+    private static $icon = 'font-icon-block-globe';
 
     private static $table_name = 'ElementalMaps';
 
@@ -72,7 +72,7 @@ class ElementalMaps extends BaseElement
         ]));
 
         $markersField = $fields->dataFieldByName('Markers');
-        if($markersField){
+        if ($markersField) {
             $markersField->setConfig(GridFieldConfig_RecordEditor::create());
         }
 
