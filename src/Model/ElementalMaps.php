@@ -57,16 +57,16 @@ class ElementalMaps extends BaseElement
     {
         $fields = parent::getCMSFields();
 
-        $fields->addFieldToTab('Root.Main', new HeaderField('MapLocationHeader', 'Map location'));
-        $fields->addFieldToTab('Root.Main', $googlePlacesField = new GooglePlacesField('MapLocation', 'Map location'));
+        $fields->addFieldToTab('Root.Main', HeaderField::create('MapLocationHeader', 'Map Center'));
+        $fields->addFieldToTab('Root.Main', $googlePlacesField = GooglePlacesField::create('MapLocation', 'Location')->setDescription('Start typing to search places using Google Maps'));
         $fields->addFieldToTab('Root.Main', TextField::create('Latitude'));
         $fields->addFieldToTab('Root.Main', TextField::create('Longitude'));
         $googlePlacesField->setLatitudeField('Latitude');
         $googlePlacesField->setLongitudeField('Longitude');
 
-        $fields->addFieldToTab('Root.Main', new HeaderField('MapSettingsHeader', 'Map settings'));
-        $fields->addFieldToTab('Root.Main', new NumericField('MapZoom', 'Map zoom'));
-        $fields->addFieldToTab('Root.Main', new DropdownField('MapType', 'Map type', [
+        $fields->addFieldToTab('Root.Main', HeaderField::create('MapSettingsHeader', 'Map Settings'));
+        $fields->addFieldToTab('Root.Main', NumericField::create('MapZoom', 'Zoom Level')->setDescription('0 = World, 20 = Building'));
+        $fields->addFieldToTab('Root.Main', DropdownField::create('MapType', 'Map Type', [
             'roadmap' => 'Roadmap',
             'satellite' => 'Satellite',
             'hybrid' => 'Hybrid',
