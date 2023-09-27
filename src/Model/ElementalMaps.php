@@ -7,6 +7,7 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\ORM\FieldType\DBField;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use TheWebmen\Addressfield\Forms\GooglePlacesField;
@@ -103,8 +104,19 @@ class ElementalMaps extends BaseElement
         return $fields;
     }
 
+    protected function provideBlockSchema()
+    {
+        $blockSchema = parent::provideBlockSchema();
+        $blockSchema['content'] = $this->getSummary();
+        return $blockSchema;
+    }
+
     public function getSummary()
     {
-        return $this->MapLocation;
+        $label = $this->MapLocation;
+        if ($this->Markers()->exists()) {
+            $label .= ' - ' . $this->Markers()->count() . ' markers';
+        }
+        return DBField::create_field('HTMLText', $label)->getValue();
     }
 }
