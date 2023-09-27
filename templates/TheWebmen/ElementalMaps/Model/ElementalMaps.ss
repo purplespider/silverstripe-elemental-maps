@@ -1,17 +1,17 @@
 <div class="google-map" <% if $MapHeight %>style="height:$MapHeight"<% end_if %> data-latitude="$Latitude" data-longitude="$Longitude" data-zoom="$MapZoom" data-type="$MapType" data-mapid="$MapID" data-iconurl="$MarkerIcon.URL" data-iconwidth="$MarkerIconWidth" data-iconheight="$MarkerIconHeight">
     <% if $Markers %>
-    <% loop $Markers %>
-    <script class="map-markers" type="text/json">
-        [
-            {
-                "latitude": $Latitude,
-                "longitude": $Longitude,
-                "title": "$Title",
-                "link": <% if $Link %>"$Link.LinkURL"<% else %>false<% end_if %>
-            }<% if not $Last %>,<% end_if %>
-        ]
-    </script>
-    <% end_loop %>
+        <script class="map-markers" type="text/json">
+            [
+            <% loop $Markers %>
+                {
+                    "latitude": $Latitude,
+                    "longitude": $Longitude,
+                    "title": "$Title",
+                    "link": <% if $Link %>"$Link.LinkURL"<% else %>false<% end_if %>
+                }<% if not $Last %>,<% end_if %>
+            <% end_loop %>
+            ]
+        </script>
     <% end_if %>
 </div>
 <script>
