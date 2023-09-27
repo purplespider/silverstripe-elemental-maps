@@ -33,7 +33,7 @@ class ElementalMapsMarker extends DataObject
         $fields = parent::getCMSFields();
 
         $fields->removeByName('ElementalMapsID');
-        $fields->removeByName('Link');
+        $fields->removeByName('LinkID');
 
         $fields->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
         $fields->addFieldToTab('Root.Main', $googlePlacesField = new GooglePlacesField('MapLocation', 'Map location'));
