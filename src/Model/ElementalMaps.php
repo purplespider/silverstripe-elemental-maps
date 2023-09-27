@@ -43,6 +43,7 @@ class ElementalMaps extends BaseElement
         'MapZoom' => 'Int',
         'MapType' => 'Varchar',
         'MapHeight' => 'Varchar',
+        'MapID' => 'Varchar',
     ];
 
     private static $has_many = [
@@ -76,6 +77,7 @@ class ElementalMaps extends BaseElement
         ]));
 
         $fields->addFieldToTab('Root.Main', TextField::create('MapHeight', 'Map Height')->setDescription('CSS value, e.g. 500px - Leave empty to control in stylesheet'));
+        $fields->addFieldToTab('Root.Main', TextField::create('MapID', 'Map ID')->setDescription('optional - Google Maps Map ID. Allows you to use custom styles and layers. See <a href="https://developers.google.com/maps/documentation/javascript/styling" target="_blank">Google Maps Styling</a>'));
 
         $markersField = $fields->dataFieldByName('Markers');
         if ($markersField) {

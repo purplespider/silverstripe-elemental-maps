@@ -1,4 +1,4 @@
-<div class="google-map" <% if $MapHeight %>style="height:$MapHeight"<% end_if %> data-latitude="$Latitude" data-longitude="$Longitude" data-zoom="$MapZoom" data-type="$MapType">
+<div class="google-map" <% if $MapHeight %>style="height:$MapHeight"<% end_if %> data-latitude="$Latitude" data-longitude="$Longitude" data-zoom="$MapZoom" data-type="$MapType" data-mapid="$MapID">
     <% if $Markers %>
     <% loop $Markers %>
     <script class="map-markers" type="text/json">
@@ -27,7 +27,8 @@
                     lng: parseFloat(mapElement.dataset.longitude)
                 },
                 zoom: parseFloat(mapElement.dataset.zoom),
-                mapTypeId: mapElement.dataset.type
+                mapTypeId: mapElement.dataset.type,
+                mapId: mapElement.dataset.mapid
             });
 
             if(markersData){
