@@ -1,4 +1,4 @@
-<div class="google-map" <% if $MapHeight %>style="height:$MapHeight"<% end_if %> data-latitude="$Latitude" data-longitude="$Longitude" data-zoom="$MapZoom" data-type="$MapType" data-mapid="$MapID">
+<div class="google-map" <% if $MapHeight %>style="height:$MapHeight"<% end_if %> data-latitude="$Latitude" data-longitude="$Longitude" data-zoom="$MapZoom" data-type="$MapType" data-mapid="$MapID" data-iconurl="$MarkerIcon.URL" data-iconwidth="$MarkerIconWidth" data-iconheight="$MarkerIconHeight">
     <% if $Markers %>
     <% loop $Markers %>
     <script class="map-markers" type="text/json">
@@ -44,6 +44,15 @@
                         title: markersData[j].title,
                         allData: markersData[j]
                     });
+                    if(mapElement.dataset.iconurl){
+                        marker.set('icon', mapElement.dataset.iconurl);
+                    };
+                    if(mapElement.dataset.iconwidth && mapElement.dataset.iconheight){
+                        marker.set('icon', {
+                            url: mapElement.dataset.iconurl,
+                            scaledSize: new google.maps.Size(mapElement.dataset.iconwidth,mapElement.dataset.iconheight)
+                        });
+                    };
                     marker.addListener('click', function(e) {
                         if(this.allData.link){
                             window.location = this.allData.link;

@@ -2,13 +2,15 @@
 
 namespace TheWebmen\ElementalMaps\Model;
 
-use DNADesign\Elemental\Models\BaseElement;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Assets\File;
+use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\NumericField;
-use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\DropdownField;
+use DNADesign\Elemental\Models\BaseElement;
+use SilverStripe\AssetAdmin\Forms\UploadField;
 use TheWebmen\Addressfield\Forms\GooglePlacesField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use TheWebmen\ElementalMaps\Controller\ElementalMapsController;
 
 class ElementalMaps extends BaseElement
@@ -44,10 +46,20 @@ class ElementalMaps extends BaseElement
         'MapType' => 'Varchar',
         'MapHeight' => 'Varchar',
         'MapID' => 'Varchar',
+        'MarkerIconWidth' => 'Int',
+        'MarkerIconHeight' => 'Int',
     ];
 
     private static $has_many = [
         'Markers' => ElementalMapsMarker::class
+    ];
+
+    private static $has_one = [
+        'MarkerIcon' => File::class
+    ];
+
+    private static $owns = [
+        'MarkerIcon'
     ];
 
     private static $defaults = [
@@ -78,6 +90,10 @@ class ElementalMaps extends BaseElement
 
         $fields->addFieldToTab('Root.Main', TextField::create('MapHeight', 'Map Height')->setDescription('CSS value, e.g. 500px - Leave empty to control in stylesheet'));
         $fields->addFieldToTab('Root.Main', TextField::create('MapID', 'Map ID')->setDescription('optional - Google Maps Map ID. Allows you to use custom styles and layers. See <a href="https://developers.google.com/maps/documentation/javascript/styling" target="_blank">Google Maps Styling</a>'));
+
+        $fields->addFieldToTab('Root.Main', UploadField::create('MarkerIcon', 'Custom Marker Icon'));
+        $fields->addFieldToTab('Root.Main', NumericField::create('MarkerIconWidth', 'Custom Marker Icon Width'));
+        $fields->addFieldToTab('Root.Main', NumericField::create('MarkerIconHeight', 'Custom Marker Icon Height'));
 
         $markersField = $fields->dataFieldByName('Markers');
         if ($markersField) {
