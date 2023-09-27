@@ -30,19 +30,25 @@ class ElementalMapsMarker extends DataObject
 
     public function getCMSFields()
     {
+
+        $this->beforeUpdateCMSFields(
+            function ($fields) {
+
+                $fields->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
+                $fields->addFieldToTab('Root.Main', $googlePlacesField = GooglePlacesField::create('MapLocation', 'Location')->setDescription('Start typing to search places using Google Maps'));
+                $fields->addFieldToTab('Root.Main', TextField::create('Latitude'));
+                $fields->addFieldToTab('Root.Main', TextField::create('Longitude'));
+                $googlePlacesField->setLatitudeField('Latitude');
+                $googlePlacesField->setLongitudeField('Longitude');
+
+                $fields->addFieldToTab('Root.Main', new LinkField('Link', 'Link', $this));
+            }
+        );
+
         $fields = parent::getCMSFields();
 
         $fields->removeByName('ElementalMapsID');
         $fields->removeByName('LinkID');
-
-        $fields->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
-        $fields->addFieldToTab('Root.Main', $googlePlacesField = GooglePlacesField::create('MapLocation', 'Location')->setDescription('Start typing to search places using Google Maps'));
-        $fields->addFieldToTab('Root.Main', TextField::create('Latitude'));
-        $fields->addFieldToTab('Root.Main', TextField::create('Longitude'));
-        $googlePlacesField->setLatitudeField('Latitude');
-        $googlePlacesField->setLongitudeField('Longitude');
-
-        $fields->addFieldToTab('Root.Main', new LinkField('Link', 'Link', $this));
 
         return $fields;
     }
