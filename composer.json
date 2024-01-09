@@ -16,8 +16,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "silverstripe/cms": "^4.0@dev",
-        "silverstripe/vendor-plugin": "^1.0",
+        "silverstripe/cms": "^5",
         "thewebmen/silverstripe-addressfield": "^1.0",
         "gorriecoe/silverstripe-linkfield": "^1.0"
     },
